@@ -65,6 +65,7 @@ static int LoadDBUSSyms(void)
     SDL_DBUS_SYM(DBusDispatchStatus (*)(DBusConnection *), connection_dispatch);
     SDL_DBUS_SYM(dbus_bool_t (*)(DBusMessage *, const char *, const char *), message_is_signal);
     SDL_DBUS_SYM(dbus_bool_t (*)(DBusMessage *, const char *), message_has_path);
+    SDL_DBUS_SYM(DBusMessage *(*)(const char *, const char *, const char *), message_new_signal);
     SDL_DBUS_SYM(DBusMessage *(*)(const char *, const char *, const char *, const char *), message_new_method_call);
     SDL_DBUS_SYM(dbus_bool_t (*)(DBusMessage *, int, ...), message_append_args);
     SDL_DBUS_SYM(dbus_bool_t (*)(DBusMessage *, int, va_list), message_append_args_valist);
@@ -76,6 +77,7 @@ static int LoadDBUSSyms(void)
     SDL_DBUS_SYM(dbus_bool_t (*)(DBusMessage *, DBusError *, int, va_list), message_get_args_valist);
     SDL_DBUS_SYM(dbus_bool_t (*)(DBusMessage *, DBusMessageIter *), message_iter_init);
     SDL_DBUS_SYM(dbus_bool_t (*)(DBusMessageIter *), message_iter_next);
+    SDL_DBUS_SYM(void (*)(DBusMessageIter *, DBusMessageIter *), message_iter_abandon_container_if_open);
     SDL_DBUS_SYM(void (*)(DBusMessageIter *, void *), message_iter_get_basic);
     SDL_DBUS_SYM(int (*)(DBusMessageIter *), message_iter_get_arg_type);
     SDL_DBUS_SYM(void (*)(DBusMessageIter *, DBusMessageIter *), message_iter_recurse);

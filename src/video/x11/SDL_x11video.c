@@ -215,6 +215,7 @@ static SDL_VideoDevice *X11_CreateDevice(void)
     device->ShowWindowSystemMenu = X11_ShowWindowSystemMenu;
     device->SetWindowFocusable = X11_SetWindowFocusable;
     device->SyncWindow = X11_SyncWindow;
+    device->SetWindowIconProgress = X11_SetWindowIconProgress;
 
 #ifdef SDL_VIDEO_DRIVER_X11_XFIXES
     device->SetWindowMouseRect = X11_SetWindowMouseRect;

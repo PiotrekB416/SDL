@@ -2012,4 +2012,71 @@ int X11_SetWindowFocusable(SDL_VideoDevice *_this, SDL_Window *window, SDL_bool 
     return 0;
 }
 
+void X11_SetWindowIconProgress(SDL_VideoDevice *_this, int progress)
+{
+#ifdef SDL_USE_LIBDBUS
+    SDL_DBusContext *dbus = SDL_DBus_GetContext();
+    if (!dbus)
+        return;
+
+    DBusMessage *message = dbus->message_new_signal("/whatever", "com.canonical.Unity.LauncherEntry", "Update");
+    if (!message)
+        return;
+
+    DBusMessageIter iter, aIter;
+
+    dbus->message_iter_init_append(message, &iter);
+
+    if (!dbus->message_iter_open_container(&iter, 'a', "{sv}", &aIter))
+        return;
+
+    DBusMessageIter eIter;
+    if (!dbus->message_iter_open_container(&aIter, 'e', NULL, &eIter)) {
+        dbus->message_iter_abandon_container_if_open(&iter, &aIter);
+        return;
+    }
+
+    const char* key = "progress";
+    dbus->message_iter_append_basic(&eIter, 's', (void*)(&key));
+
+    DBusMessageIter vIter;
+    if (!dbus->message_iter_open_container(&eIter, 'v', "d", &vIter)) {
+        dbus->message_iter_abandon_container_if_open(&aIter, &eIter);
+        dbus->message_iter_abandon_container_if_open(&iter, &aIter);
+        return;
+    }
+
+    double val = (double)progress / 100.0;
+    dbus->message_iter_append_basic(&vIter, 'd', (void*)(&val));
+
+    dbus->message_iter_close_container(&eIter, &vIter);
+    dbus->message_iter_close_container(&aIter, &eIter);
+
+    //
+    if (!dbus->message_iter_open_container(&aIter, 'e', NULL, &eIter)) {
+        dbus->message_iter_abandon_container_if_open(&iter, &aIter);
+        return;
+    }
+
+    key = "progress-visible";
+    dbus->message_iter_append_basic(&eIter, 's', (void*)(&key));
+
+    if (!dbus->message_iter_open_container(&eIter, 'v', "b", &vIter)) {
+        dbus->message_iter_abandon_container_if_open(&aIter, &eIter);
+        dbus->message_iter_abandon_container_if_open(&iter, &aIter);
+        return;
+    }
+
+    val = 1;
+    dbus->message_iter_append_basic(&vIter, 'b', (void*)(&val));
+
+    dbus->message_iter_close_container(&eIter, &vIter);
+    dbus->message_iter_close_container(&aIter, &eIter);
+
+    dbus->message_iter_close_container(&iter, &aIter);
+
+    dbus->connection_send(dbus->session_conn, message, 0);
+#endif
+}
+
 #endif /* SDL_VIDEO_DRIVER_X11 */

@@ -19,6 +19,7 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
+#include "SDL3/SDL_error.h"
 #include "SDL_internal.h"
 
 /* The high-level video driver subsystem */
@@ -2488,6 +2489,16 @@ int SDL_SetWindowIcon(SDL_Window *window, SDL_Surface *icon)
     }
 
     return _this->SetWindowIcon(_this, window, window->icon);
+}
+
+int SDL_SetWindowIconProgress(int progress)
+{
+    if (!_this->SetWindowIconProgress) {
+        return SDL_Unsupported();
+    }
+
+    _this->SetWindowIconProgress(_this, progress);
+    return 0;
 }
 
 int SDL_SetWindowPosition(SDL_Window *window, int x, int y)

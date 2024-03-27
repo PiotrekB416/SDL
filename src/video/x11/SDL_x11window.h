@@ -138,6 +138,7 @@ extern int X11_FlashWindow(SDL_VideoDevice *_this, SDL_Window *window, SDL_Flash
 extern void X11_ShowWindowSystemMenu(SDL_Window *window, int x, int y);
 extern int X11_SyncWindow(SDL_VideoDevice *_this, SDL_Window *window);
 extern int X11_SetWindowFocusable(SDL_VideoDevice *_this, SDL_Window *window, SDL_bool focusable);
+extern void X11_SetWindowIconProgress(SDL_VideoDevice *_this, int progress);
 
 int SDL_X11_SetWindowTitle(Display *display, Window xwindow, char *title);
 void X11_UpdateWindowPosition(SDL_Window *window, SDL_bool use_current_position);

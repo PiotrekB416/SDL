@@ -1199,6 +1199,17 @@ extern DECLSPEC const char *SDLCALL SDL_GetWindowTitle(SDL_Window *window);
 extern DECLSPEC int SDLCALL SDL_SetWindowIcon(SDL_Window *window, SDL_Surface *icon);
 
 /**
+ * Set taskbar progress
+ *
+ * \param progress in percent
+ * \returns 0 on success
+ *
+ * \since This function is available since SDL 3.0.0.
+ *
+ * */
+extern DECLSPEC int SDLCALL SDL_SetWindowIconProgress(int progress);
+
+/**
  * Request that the window's position be set.
  *
  * If, at the time of this request, the window is in a fixed-size state such
