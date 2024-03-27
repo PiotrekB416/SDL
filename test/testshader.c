@@ -521,6 +521,7 @@ int main(int argc, char **argv)
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Shaders not supported!\n");
     }
     done = 0;
+    SDL_SetWindowIconProgress(50);
     while (!done) {
         DrawGLScene(window, texture, texcoords);
 

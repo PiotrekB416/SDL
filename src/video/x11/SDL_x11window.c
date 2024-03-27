@@ -2019,7 +2019,7 @@ void X11_SetWindowIconProgress(SDL_VideoDevice *_this, int progress)
     if (!dbus)
         return;
 
-    DBusMessage *message = dbus->message_new_signal("/whatever", "com.canonical.Unity.LauncherEntry", "Update");
+    DBusMessage *message = dbus->message_new_signal("/", "com.canonical.Unity.LauncherEntry", "Update");
     if (!message)
         return;
 

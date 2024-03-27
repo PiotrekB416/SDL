@@ -440,7 +440,7 @@ int X11_VideoInit(SDL_VideoDevice *_this)
     X11_InitTouch(_this);
 
 #ifdef SDL_VIDEO_DRIVER_X11_XINPUT2
-    X11_InitPen(_this);
+    //X11_InitPen(_this);
 #endif
 
     return 0;
